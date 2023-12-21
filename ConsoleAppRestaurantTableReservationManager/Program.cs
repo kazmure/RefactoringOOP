@@ -8,11 +8,11 @@ public class TableReservationApp
     static void Main(string[] args)
     {
         ReservationManager m = new ReservationManager();
-        m.AddRestaurantMethod("A", 10);
-        m.AddRestaurantMethod("B", 5);
+        m.AddRestaurant("A", 10);
+        m.AddRestaurant("B", 5);
 
-        Console.WriteLine(m.BookTable("A", new DateTime(2023, 12, 25), 3)); // True
-        Console.WriteLine(m.BookTable("A", new DateTime(2023, 12, 25), 3)); // False
+        Console.WriteLine(m.ReserveTable("A", new DateTime(2023, 12, 25), 3)); // True
+        Console.WriteLine(m.ReserveTable("A", new DateTime(2023, 12, 25), 3)); // False
     }
 }
 
@@ -28,7 +28,7 @@ public class ReservationManager
     }
 
     // Add Restaurant Method
-    public void AddRestaurantMethod(string n, int t)
+    public void AddRestaurant(string n, int t)
     {
         try
         {
@@ -49,7 +49,7 @@ public class ReservationManager
 
     // Load Restaurants From
     // File
-    private void LoadRestaurantsFromFileMethod(string fileP)
+    private void LoadRestaurantsFromFile(string fileP)
     {
         try
         {
@@ -59,7 +59,7 @@ public class ReservationManager
                 var parts = l.Split(',');
                 if (parts.Length == 2 && int.TryParse(parts[1], out int tableCount))
                 {
-                    AddRestaurantMethod(parts[0], tableCount);
+                    AddRestaurant(parts[0], tableCount);
                 }
                 else
                 {
@@ -74,7 +74,7 @@ public class ReservationManager
     }
 
     //Find All Free Tables
-    public List<string> FindAllFreeTables(DateTime dt)
+    public List<string> GetAllFreeTables(DateTime dt)
     {
         try
         { 
@@ -98,7 +98,7 @@ public class ReservationManager
         }
     }
 
-    public bool BookTable(string rName, DateTime d, int tNumber)
+    public bool ReserveTable(string rName, DateTime d, int tNumber)
     {
         foreach (var r in res)
         {
@@ -116,7 +116,7 @@ public class ReservationManager
         throw new Exception(null); //Restaurant not found
     }
 
-    public void SortRestaurantsByAvailabilityForUsersMethod(DateTime dt)
+    public void SortRestaurantsByAvailability(DateTime dt)
     {
         try
         { 
@@ -126,8 +126,8 @@ public class ReservationManager
                 swapped = false;
                 for (int i = 0; i < res.Count - 1; i++)
                 {
-                    int avTc = CountAvailableTablesForRestaurantAndDateTimeMethod(res[i], dt); // available tables current
-                    int avTn = CountAvailableTablesForRestaurantAndDateTimeMethod(res[i + 1], dt); // available tables next
+                    int avTc = CountAvailableTablesForRestaurantAndDateTime(res[i], dt); // available tables current
+                    int avTn = CountAvailableTablesForRestaurantAndDateTime(res[i + 1], dt); // available tables next
 
                     if (avTc < avTn)
                     {
@@ -147,7 +147,7 @@ public class ReservationManager
     }
 
     // count available tables in a restaurant
-    public int CountAvailableTablesForRestaurantAndDateTimeMethod(Restaurant r, DateTime dt)
+    public int CountAvailableTablesForRestaurantAndDateTime(Restaurant r, DateTime dt)
     {
         try
         {
