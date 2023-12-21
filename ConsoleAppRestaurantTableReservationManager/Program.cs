@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 
-// Main Application Class
 public class TableReservationApp
 {
     static void Main(string[] args)
@@ -16,10 +15,8 @@ public class TableReservationApp
     }
 }
 
-// Reservation Manager Class
 public class ReservationManager
 {
-    // res
     public List<Restaurant> res;
 
     public ReservationManager()
@@ -27,7 +24,6 @@ public class ReservationManager
         res = new List<Restaurant>();
     }
 
-    // Add Restaurant Method
     public void AddRestaurant(string n, int t)
     {
         try
@@ -47,8 +43,6 @@ public class ReservationManager
         }
     }
 
-    // Load Restaurants From
-    // File
     private void LoadRestaurantsFromFile(string fileP)
     {
         try
@@ -73,7 +67,6 @@ public class ReservationManager
         }
     }
 
-    //Find All Free Tables
     public List<string> GetAllFreeTables(DateTime dt)
     {
         try
@@ -131,7 +124,6 @@ public class ReservationManager
 
                     if (avTc < avTn)
                     {
-                        // Swap restaurants
                         var temp = res[i];
                         res[i] = res[i + 1];
                         res[i + 1] = temp;
@@ -146,7 +138,6 @@ public class ReservationManager
         }
     }
 
-    // count available tables in a restaurant
     public int CountAvailableTablesForRestaurantAndDateTime(Restaurant r, DateTime dt)
     {
         try
@@ -169,17 +160,15 @@ public class ReservationManager
     }
 }
 
-// Restaurant Class
 public class Restaurant
 {
-    public string Name; //name
-    public Table[] Tables; // tables
+    public string Name;
+    public Table[] Tables;
 }
 
-// Table Class
 public class Table
 {
-    private List<DateTime> BookedDates; //booked dates
+    private List<DateTime> BookedDates;
 
 
     public Table()
@@ -187,7 +176,6 @@ public class Table
         BookedDates = new List<DateTime>();
     }
 
-    // book
     public bool Book(DateTime d)
     {
         try
@@ -196,7 +184,6 @@ public class Table
             {
                 return false;
             }
-            //add to BookedDates
             BookedDates.Add(d);
             return true;
         }
@@ -207,7 +194,6 @@ public class Table
         }
     }
 
-    // is booked
     public bool IsBooked(DateTime d)
     {
         return BookedDates.Contains(d);
