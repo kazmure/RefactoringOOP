@@ -89,23 +89,18 @@ public class ReservationManager
         }
     }
 
-    public bool ReserveTable(string rName, DateTime d, int tNumber)
+    public bool ReserveTable(string restaurantName, DateTime date, int tableNumber)
     {
-        foreach (var r in res)
-        {
-            if (r.Name == rName)
-            {
-                if (tNumber < 0 || tNumber >= r.Tables.Length)
-                {
-                    throw new Exception(null); //Invalid table number
-                }
+        var restaurant = res.FirstOrDefault(r => r.Name == restaurantName);
 
-                return r.Tables[tNumber].Book(d);
-            }
+        if (restaurant != null && tableNumber >= 0 && tableNumber < restaurant.Tables.Length)
+        {
+            return restaurant.Tables[tableNumber].Book(date);
         }
 
-        throw new Exception(null); //Restaurant not found
+        throw new ArgumentException("Invalid restaurant name, table number, or restaurant not found");
     }
+
 
     public void SortRestaurantsByAvailability(DateTime date)
     {
@@ -121,17 +116,17 @@ public class ReservationManager
 
 
     public int CountAvailableTablesForRestaurantAndDateTime(Restaurant restaurant, DateTime date)
+{
+    try
     {
-        try
-        {
-            return restaurant.Tables.Count(table => !table.IsBooked(date));
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Error");
-            return 0;
-        }
+        return restaurant.Tables.Count(table => !table.IsBooked(date));
     }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Error");
+        return 0;
+    }
+}
 
 }
 
