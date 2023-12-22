@@ -1,8 +1,21 @@
 {
   "version": 2,
-  "dgSpecHash": "XvJLYovktuTLML9b+US4sDNlHQTa6IcUhDjZ3aJ9/CjgABUHJA2nAbRMlfi+TqVdwJ/s5kdrsrkOg4UsKgaGnQ==",
+  "dgSpecHash": "8A7iYa9hZoVK8NQe9cPvgychTPdtjNTK8WbSxjeaypKajZtUEF1sagZ6su6HPg10KDKzkp+X6NzukkYiom153w==",
   "success": true,
   "projectFilePath": "C:\\Users\\kazmur\\Desktop\\OOP_kazmur\\RefactoringOOP\\ConsoleAppRestaurantTableReservationManager\\ConsoleAppRestaurantTableReservationManager.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\kazmur\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\kazmur\\.nuget\\packages\\netstandard.library\\2.0.0\\netstandard.library.2.0.0.nupkg.sha512",
+    "C:\\Users\\kazmur\\.nuget\\packages\\nunit\\3.13.3\\nunit.3.13.3.nupkg.sha512",
+    "C:\\Users\\kazmur\\.nuget\\packages\\serilog\\3.1.1\\serilog.3.1.1.nupkg.sha512",
+    "C:\\Users\\kazmur\\.nuget\\packages\\serilog.sinks.console\\5.0.1\\serilog.sinks.console.5.0.1.nupkg.sha512",
+    "C:\\Users\\kazmur\\.nuget\\packages\\xunit\\2.4.2\\xunit.2.4.2.nupkg.sha512",
+    "C:\\Users\\kazmur\\.nuget\\packages\\xunit.abstractions\\2.0.3\\xunit.abstractions.2.0.3.nupkg.sha512",
+    "C:\\Users\\kazmur\\.nuget\\packages\\xunit.analyzers\\1.0.0\\xunit.analyzers.1.0.0.nupkg.sha512",
+    "C:\\Users\\kazmur\\.nuget\\packages\\xunit.assert\\2.4.2\\xunit.assert.2.4.2.nupkg.sha512",
+    "C:\\Users\\kazmur\\.nuget\\packages\\xunit.core\\2.4.2\\xunit.core.2.4.2.nupkg.sha512",
+    "C:\\Users\\kazmur\\.nuget\\packages\\xunit.extensibility.core\\2.4.2\\xunit.extensibility.core.2.4.2.nupkg.sha512",
+    "C:\\Users\\kazmur\\.nuget\\packages\\xunit.extensibility.execution\\2.4.2\\xunit.extensibility.execution.2.4.2.nupkg.sha512"
+  ],
   "logs": []
 }
