@@ -4,16 +4,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 
+
 public class TableReservationApp
 {
     static void Main(string[] args)
     {
         ReservationManager m = new ReservationManager();
-        m.AddRestaurant("A", 10);
-        m.AddRestaurant("B", 5);
+        try
+        {
+            m.AddRestaurant("A", 10);
+            m.AddRestaurant("B", 5);
 
-        Console.WriteLine(m.ReserveTable("A", new DateTime(2023, 12, 25), 3)); // True
-        Console.WriteLine(m.ReserveTable("A", new DateTime(2023, 12, 25), 3)); // False
+            Console.WriteLine(m.ReserveTable("A", new DateTime(2023, 12, 25), 3)); // True
+            Console.WriteLine(m.ReserveTable("A", new DateTime(2023, 12, 25), 3)); // False
+        }
+
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erorr");
+        }
     }
 }
 
@@ -35,7 +44,7 @@ public class ReservationManager
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Error");
+            Console.WriteLine("Error Main");
         }
     }
 
@@ -60,7 +69,7 @@ public class ReservationManager
     }
     catch (Exception ex)
     {
-        Console.WriteLine("Error");
+        Console.WriteLine("Error AddRestaurant");
     }
 }
 
@@ -105,7 +114,7 @@ public class ReservationManager
         }
         catch (Exception ex)
         {
-            Console.WriteLine("Error");
+            Console.WriteLine("Error SortRestaurantsByAvailability");
         }
     }
 
@@ -124,6 +133,17 @@ public class ReservationManager
 }
 
 }
+
+
+private readonly ILogger<ReservationManager> _logger;
+
+public ReservationManager(ILogger<ReservationManager> logger)
+{
+    res = new List<Restaurant>();
+    _logger = logger;
+}
+
+// Використання _logger замість Console.WriteLine у методах класу.
 
 public class Restaurant
 {
