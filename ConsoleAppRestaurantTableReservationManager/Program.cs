@@ -65,29 +65,24 @@ public class ReservationManager
 }
 
 
-    public List<string> GetAllFreeTables(DateTime dt)
+    public List<string> GetAllFreeTables(DateTime date)
     {
-        try
-        { 
-            List<string> free = new List<string>();
-            foreach (var r in res)
+        var freeTables = new List<string>();
+
+        foreach (var restaurant in res)
+        {
+            for (int tableNumber = 0; tableNumber < restaurant.Tables.Length; tableNumber++)
             {
-                for (int i = 0; i < r.Tables.Length; i++)
+                if (!restaurant.Tables[tableNumber].IsBooked(date))
                 {
-                    if (!r.Tables[i].IsBooked(dt))
-                    {
-                        free.Add($"{r.Name} - Table {i + 1}");
-                    }
+                    freeTables.Add($"{restaurant.Name} - Table {tableNumber + 1}");
                 }
             }
-            return free;
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Error");
-            return new List<string>();
-        }
+
+        return freeTables;
     }
+
 
     public bool ReserveTable(string restaurantName, DateTime date, int tableNumber)
     {
