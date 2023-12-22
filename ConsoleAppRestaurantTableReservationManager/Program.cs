@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class TableReservationApp
 {
@@ -24,24 +25,19 @@ public class ReservationManager
         res = new List<Restaurant>();
     }
 
-    public void AddRestaurant(string n, int t)
+    public void AddRestaurant(string name, int tableCount)
     {
         try
         {
-            Restaurant r = new Restaurant();
-            r.Name = n;
-            r.Tables = new Table[t];
-            for (int i = 0; i < t; i++)
-            {
-                r.Tables[i] = new Table();
-            }
-            res.Add(r);
+            Restaurant restaurant = new Restaurant { Name = name, Tables = Enumerable.Range(0, tableCount).Select(_ => new Table()).ToArray() };
+            res.Add(restaurant);
         }
         catch (Exception ex)
         {
             Console.WriteLine("Error");
         }
     }
+
 
     private void LoadRestaurantsFromFile(string fileP)
     {
