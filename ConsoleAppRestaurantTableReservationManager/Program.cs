@@ -120,19 +120,11 @@ public class ReservationManager
     }
 
 
-    public int CountAvailableTablesForRestaurantAndDateTime(Restaurant r, DateTime dt)
+    public int CountAvailableTablesForRestaurantAndDateTime(Restaurant restaurant, DateTime date)
     {
         try
         {
-            int count = 0;
-            foreach (var t in r.Tables)
-            {
-                if (!t.IsBooked(dt))
-                {
-                    count++;
-                }
-            }
-            return count;
+            return restaurant.Tables.Count(table => !table.IsBooked(date));
         }
         catch (Exception ex)
         {
@@ -140,6 +132,7 @@ public class ReservationManager
             return 0;
         }
     }
+
 }
 
 public class Restaurant
