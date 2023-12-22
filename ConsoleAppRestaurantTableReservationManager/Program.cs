@@ -41,28 +41,28 @@ public class ReservationManager
 
 
     private void LoadRestaurantsFromFile(string filePath)
+{
+    try
     {
-        try
+        string[] lines = File.ReadAllLines(filePath);
+        foreach (string line in lines)
         {
-            string[] lines = File.ReadAllLines(filePath);
-            foreach (string line in lines)
+            var parts = line.Split(',');
+            if (parts.Length == 2 && int.TryParse(parts[1], out int tableCount))
             {
-                var parts = line.Split(',');
-                if (parts.Length == 2 && int.TryParse(parts[1], out int tableCount))
-                {
-                    AddRestaurant(parts[0], tableCount);
-                }
-                else
-                {
-                    Console.WriteLine(line);
-                }
+                AddRestaurant(parts[0], tableCount);
+            }
+            else
+            {
+                Console.WriteLine(line);
             }
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Error");
-        }
     }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Error");
+    }
+}
 
 
     public List<string> GetAllFreeTables(DateTime dt)
@@ -107,34 +107,18 @@ public class ReservationManager
         throw new Exception(null); //Restaurant not found
     }
 
-    public void SortRestaurantsByAvailability(DateTime dt)
+    public void SortRestaurantsByAvailability(DateTime date)
     {
         try
-        { 
-            bool swapped;
-            do
-            {
-                swapped = false;
-                for (int i = 0; i < res.Count - 1; i++)
-                {
-                    int avTc = CountAvailableTablesForRestaurantAndDateTime(res[i], dt); // available tables current
-                    int avTn = CountAvailableTablesForRestaurantAndDateTime(res[i + 1], dt); // available tables next
-
-                    if (avTc < avTn)
-                    {
-                        var temp = res[i];
-                        res[i] = res[i + 1];
-                        res[i + 1] = temp;
-                        swapped = true;
-                    }
-                }
-            } while (swapped);
+        {
+            res = res.OrderByDescending(r => CountAvailableTablesForRestaurantAndDateTime(r, date)).ToList();
         }
         catch (Exception ex)
         {
             Console.WriteLine("Error");
         }
     }
+
 
     public int CountAvailableTablesForRestaurantAndDateTime(Restaurant r, DateTime dt)
     {
